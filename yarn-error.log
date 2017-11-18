@@ -1,0 +1,58 @@
+Arguments: 
+  C:\Program Files\nodejs\node.exe C:\Program Files (x86)\Yarn\bin\yarn.js add postcss-cssnext --save
+
+PATH: 
+  C:\Program Files\Git\mingw64\bin;C:\Program Files\Git\usr\bin;C:\Users\TRIVO\bin;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0;C:\Program Files (x86)\Yarn\bin;C:\Program Files\nodejs;C:\Program Files\Git\cmd;C:\Program Files\TortoiseGit\bin;C:\Program Files (x86)\Skype\Phone;C:\Program Files\Microsoft VS Code\bin;C:\Users\TRIVO\AppData\Local\Yarn\bin;C:\Users\TRIVO\AppData\Roaming\npm
+
+Yarn version: 
+  1.1.0
+
+Node version: 
+  8.6.0
+
+Platform: 
+  win32 x64
+
+npm manifest: 
+  {
+    "name": "sonhoatiet",
+    "version": "1.0.0",
+    "description": "",
+    "main": "index.js",
+    "scripts": {
+      "test": "echo \"Error: no test specified\" && exit 1",
+      "watch": "webpack --progress --watch",
+      "start": "webpack-dev-server --open",
+      "server": "node server.js",
+      "build": "webpack"
+    },
+    "author": "",
+    "license": "ISC",
+    "devDependencies": {
+      "clean-webpack-plugin": "^0.1.17",
+      "css-loader": "^0.28.7",
+      "express": "^4.16.2",
+      "extract-text-webpack-plugin": "^3.0.2",
+      "file-loader": "^1.1.5",
+      "html-webpack-plugin": "^2.30.1",
+      "node-sass": "^4.6.1",
+      "postcss-loader": "^2.0.8",
+      "sass-loader": "^6.0.6",
+      "style-loader": "^0.19.0",
+      "webpack": "^3.8.1",
+      "webpack-dev-server": "^2.9.4"
+    },
+    "dependencies": {
+      "bootstrap": "^4.0.0-beta.2",
+      "precss": "^2.0.0"
+    }
+  }
+
+yarn manifest: 
+  No manifest
+
+Lockfile: 
+  No lockfile
+
+Trace: 
+  Error: EPERM: operation not permitted, unlink 'E:\xampp\htdocs\Git-FrontendMaster\sonhoatiet\node_modules\node-sass\vendor\win32-x64-57\binding.node'
