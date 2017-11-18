@@ -16,6 +16,11 @@ const extractCss = new ExtractTextPlugin({
 	disable: process.env.NODE_ENV === "development"
 });
 
+const extractJs = new ExtractTextPlugin({
+    filename: "[name].js",
+	disable: process.env.NODE_ENV === "development"
+});
+
 module.exports = {
     entry: './src/index.js',
     
@@ -65,7 +70,7 @@ module.exports = {
                         // use style-loader in development
                     fallback: "style-loader"
                 })
-            },            
+            },          
 
             {
                 test: /\.(png|svg|jpg|gif)$/,
@@ -75,13 +80,23 @@ module.exports = {
             {
                 test: /\.(woff|woff2|eot|ttf|otf)$/,
                 use: ['file-loader']
-            }            
+            },
+            
+            {
+                test: /\.(es6|js)$/,
+                loader: 'babel-loader',
+                query: {
+                    presets: ['es2015']
+                },
+                exclude: /node_modules/
+            }        
         ]
     },
     
     plugins: [
         extractCss,
         extractSass,
+        extractJs,
         new webpack.ProvidePlugin({
             $: 'jquery',
             jQuery: 'jquery',
