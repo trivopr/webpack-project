@@ -7,13 +7,16 @@ const webpack = require('webpack');
 const extractSass = new ExtractTextPlugin({
     // filename: "[name].[contenthash].css",
     filename: "[name].css",
-	disable: process.env.NODE_ENV === "development"
+    allChunks: true
+});
+const extractFonts = new ExtractTextPlugin({
+    // filename: "[name].[contenthash].css",
+    filename: "dist/font/[name].css",
+    allChunks: true
 });
 
 const extractCss = new ExtractTextPlugin({
-    // filename: "[name].[contenthash].css",
-    filename: "[name].css",
-	disable: process.env.NODE_ENV === "development"
+    filename: "[name].css"
 });
 
 const extractJs = new ExtractTextPlugin({
@@ -46,8 +49,12 @@ module.exports = {
             {
                 test: /\.css$/,
                 use: extractCss.extract({
-                    fallback: "style-loader",
-                    use: "css-loader"
+                    use: [
+                        {
+                            loader: "css-loader" // translates CSS into CommonJS
+                        }                        
+                    ],
+                    fallback: "style-loader"                    
                 })           
             },
 
@@ -81,11 +88,11 @@ module.exports = {
                 test: /\.(png|svg|jpg|gif)$/,
                 use: ['file-loader']
             },
-            
+
             {
-                test: /\.(woff|woff2|eot|ttf|otf)$/,
+                test: /\.(eot|woff|woff2|ttf|svg|png|jpe?g|gif)(\?\S*)?$/,
                 use: ['file-loader']
-            },
+            },            
             
             {
                 test: /\.(es6|js)$/,
@@ -105,11 +112,8 @@ module.exports = {
         new webpack.ProvidePlugin({
             $: 'jquery',
             jQuery: 'jquery',
-            'window.jQuery': 'jquery',
-            Popper: ['popper.js', 'default'],
-            // In case you imported plugins individually, you must also require them here:
-            Util: "exports-loader?Util!bootstrap/js/dist/util",
-            Dropdown: "exports-loader?Dropdown!bootstrap/js/dist/dropdown",
-          }) 
+            'window.jQuery': 'jquery'
+            
+        }) 
     ]
 };

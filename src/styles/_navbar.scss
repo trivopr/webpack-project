@@ -1,9 +1,8 @@
-.navbar-top {
-    color: $yel1;
-
-    &__header {
-        color: red;
-        box-shadow: 10px 10px 5px 0px green;
-    }
+.sp-navbar-top {
+    background: $primary-blue;
 }
-
+body {
+    min-height: 75rem;
+    padding-top: 4.5rem;
+}
+  
