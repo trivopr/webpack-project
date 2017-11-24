@@ -16,12 +16,12 @@ const extractFonts = new ExtractTextPlugin({
 });
 
 const extractCss = new ExtractTextPlugin({
-    filename: "[name].css"
+    filename: "lib.css"
 });
 
 const extractJs = new ExtractTextPlugin({
     filename: "[name].js",
-	disable: process.env.NODE_ENV === "development"
+    disable: process.env.NODE_ENV === "development"
 });
 
 const extractHTMLFile = new HtmlWebpackPlugin({
@@ -31,7 +31,7 @@ const extractHTMLFile = new HtmlWebpackPlugin({
 
 module.exports = {
     entry: './src/index.js',
-    
+
     output: {
         filename: 'bundle.js',
         path: path.resolve(__dirname, 'dist'),
@@ -45,55 +45,57 @@ module.exports = {
     devtool: "source-map",
 
     module: {
-        rules: [
-            {
+        rules: [{
                 test: /\.css$/,
                 use: extractCss.extract({
-                    use: [
-                        {
-                            loader: "css-loader" // translates CSS into CommonJS
-                        }                        
-                    ],
-                    fallback: "style-loader"                    
-                })           
+                    use: [{
+                        loader: "css-loader" // translates CSS into CommonJS
+                    }],
+                    fallback: "style-loader"
+                })
             },
 
             {
                 test: /\.scss$/,
                 use: extractSass.extract({
-                    use: [
-                        {
+                    use: [{
                             loader: "css-loader" // translates CSS into CommonJS
                         },
                         {
                             loader: 'postcss-loader', // Run post css actions
                             options: {
-                                plugins: function () { // post css plugins, can be exported to postcss.config.js
+                                plugins: function() { // post css plugins, can be exported to postcss.config.js
                                     return [
                                         require('precss'),
                                         require('autoprefixer')
                                     ];
                                 }
                             }
-                        },{
+                        }, {
                             loader: "sass-loader" // compiles Sass to CSS
                         }
-                    ] ,       
-                        // use style-loader in development
+                    ],
+                    // use style-loader in development
                     fallback: "style-loader"
                 })
-            },          
+            },
 
             {
                 test: /\.(png|svg|jpg|gif)$/,
-                use: ['file-loader']
+                loader: 'file-loader',
+                options: {
+                    name: 'images/[name].[ext]'
+                }
             },
 
             {
                 test: /\.(eot|woff|woff2|ttf|svg|png|jpe?g|gif)(\?\S*)?$/,
-                use: ['file-loader']
-            },            
-            
+                loader: 'file-loader',
+                options: {
+                    name: 'font/[name].[ext]'
+                }
+            },
+
             {
                 test: /\.(es6|js)$/,
                 loader: 'babel-loader',
@@ -101,10 +103,10 @@ module.exports = {
                     presets: ['es2015']
                 },
                 exclude: /node_modules/
-            }           
+            }
         ]
     },
-    
+
     plugins: [
         extractCss,
         extractSass,
@@ -113,7 +115,7 @@ module.exports = {
             $: 'jquery',
             jQuery: 'jquery',
             'window.jQuery': 'jquery'
-            
-        }) 
+
+        })
     ]
 };
