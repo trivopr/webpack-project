@@ -5,7 +5,7 @@
 - Postcss
 
 ## INTRODUCTION
- <p>This is a standard project working on Front end</p>
+ <p>This is a standard project working on Front end !</p>
   
  ## START PROJECT
   Yarn install </br>
